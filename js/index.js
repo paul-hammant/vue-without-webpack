@@ -35,5 +35,11 @@ var router = new VueRouter({
 });
 
 var app = new Vue({
-  router: router
+  router: router,
+  data: {
+      userList: [
+          { userId: 123 },
+          { userId: 456, userData: { age: 39, name: "Patrick O'Dacre" }
+      }]
+  }
 }).$mount('#app');
