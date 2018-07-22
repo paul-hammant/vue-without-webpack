@@ -1,5 +1,5 @@
 <template>
-<div>Burası Sidebar.</div>
+<div style="border: 5px solid blue;">Burası Sidebar.</div>
 </template>
 
 <script>
