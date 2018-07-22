@@ -1,42 +1,41 @@
 <template>
-<div class="userList">
-      <div class="left">
-        <h2>User List</h2>
-        <p>Buraya Tıkla: {{selectedUser}} </p>
-        <ul>
-          <li class="userLink" @click="loadUserData(123)">User 123</li>
-          <li class="userLink" @click="loadUserData(456)">User 456</li>
-        </ul>
-      </div>
-      <div class="right" v-if="selectedUser.userId">
-        <user :user-id="selectedUser.userId" :user-data="selectedUser.userData"></user>
-      </div>
+  <div class="userList" style="border: 5px solid green;">
+    <div class="left">
+      <h2>User List</h2>
+      <ul>
+        <li class="userLink" @click="loadUserData(123)">User 123</li>
+        <li class="userLink" @click="loadUserData(456)">User 456</li>
+      </ul>
     </div>
+    <div class="right" v-if="selectedUser">
+      <p>Buraya Tıkla: {{selectedUser}} </p>
+      <user :user-id="selectedUser.userId" :user-data="selectedUser.userData"></user>
+    </div>
+  </div>
 </template>
 
 <script>
-var User = httpVueLoader('./user.vue')
-module.exports = {
-  data: function data() {
-    return {
-      selectedUser: {} // selected user data. Place this here to make sure it's reactive.
-    };
-  },
-  methods: {
-    loadUserData: function loadUserData(id) {
-      this.selectedUser = id === 123 ? { userId: 123 } : { userId: 456, userData: { age: 38, name: 'Patrick' } };
-    }
-  },
-
+  const User = httpVueLoader('./user.vue');
+  module.exports = {
     components: {
       user: User
+    },
+    computed: {
+      selectedUser () {
+        return this.$store.state.selectedUser
+      }
+    },
+    methods: {
+      loadUserData(userId) {
+        this.$store.commit('loadUserData', userId)
+      }
     }
   }
-  </script>
+</script>
 
-  <style>
+<style>
   .hello {
     background-color: #ffe;
   }
-  </style>
+</style>
 

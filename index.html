@@ -8,10 +8,10 @@
 
 
   <link rel="stylesheet" href="css/style.css">
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.js'></script>
   <script src="https://unpkg.com/http-vue-loader"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.min.js'></script>
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.js'></script>
+  <script src="https://unpkg.com/vuex@3.0"></script>
 </head>
 
 <body>
@@ -19,21 +19,21 @@
     <h1>Passing Route Parameters to Component Props</h1>
 
     <p>Using the User component on a route change:</p>
-    <nav class="mainNav">
+    <nav class="mainNav" style="border: 5px solid lightgray;">
       <!-- use router-link component for navigation. -->
       <!-- specify the link by passing an object to the `to` prop. -->
-      <router-link :to="{ name: 'userList'}">User List</router-link>
-      <router-link :to="{ name: 'user', params: { userId: 123 } }">User 123</router-link>
-      <router-link :to="{ name: 'user', params: { userId: 456, userData: { age: 39, name: 'Patrick'} } }">User 456</router-link>
+      <router-link :to="{ name: 'userList' }">User List</router-link>
+      <router-link :to="{ name: 'user', params: userList[0] }">User 123</router-link>
+      <router-link :to="{ name: 'user', params: userList[1] }">User 456</router-link>
       <router-link :to="{ name: 'named'}">Named Views Demo</router-link>
     </nav>
 
-    <section class="mainBody">
+    <section class="mainBody" style="border: 5px solid darkgray;">
       <router-view></router-view>
     </section>
   </div>
 
-  <script  src="js/index.js"></script>
+  <script src="js/index.js"></script>
 
 </body>
 </html>
