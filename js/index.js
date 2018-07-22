@@ -1,32 +1,47 @@
 'use strict';
-var User = httpVueLoader('./js/user.vue');
-var Sidebar = httpVueLoader('./js/sidebar.vue');
-var UserList = httpVueLoader('./js/user-list.vue');
-var NamedWrapper = httpVueLoader('./js/named.vue');
+const User = httpVueLoader('./js/user.vue');
+const Sidebar = httpVueLoader('./js/sidebar.vue');
+const UserList = httpVueLoader('./js/user-list.vue');
+const NamedWrapper = httpVueLoader('./js/named.vue');
 
 
 Vue.use(Vuex);
 
-var store = new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    selectedUser: null,
+    selectedUserId: null,
     userList: [
       { userId: 123 },
       { userId: 456, userData: { age: 39, name: 'Patrick O\'Dacre' } }
     ]
   },
+  getters: {
+    selectedUser(state) {
+      return state.userList.find(user => user.userId === state.selectedUserId);
+    },
+    getUser: state => userId => {
+      return state.userList.find(user => user.userId === userId);
+    }
+  },
   mutations: {
-    loadUserData(state, userId) {
-      var matchedUsers = state.userList.filter(user => user.userId === userId);
-      if (matchedUsers.length) {
-        state.selectedUser = matchedUsers[0];
+    updateUser(state, {userId, key, value}) {
+      const user = state.userList.find(user => user.userId === userId);
+      if (!user.userData) {
+        user.userData = {}
       }
+      user.userData = {
+        ...user.userData,
+        [key]: value
+      }
+    },
+    selectUser(state, userId) {
+      state.selectedUserId = userId;
     },
   }
 });
 
 /* Router and App setup: */
-var routes = [{
+const routes = [{
   path: '/users',
   name: 'userList',
   component: UserList
@@ -49,16 +64,15 @@ var routes = [{
     props: true
   }];
 
-var router = new VueRouter({
+const router = new VueRouter({
   routes: routes
 });
 
 
-var app = new Vue({
+const app = new Vue({
   store: store,
   router: router,
   data: {
-    selectedUser: null,
     userList: [
       { userId: 123 },
       { userId: 456, userData: { age: 39, name: 'Patrick O\'Dacre' } }
