@@ -20,15 +20,6 @@
         if (user && 'userData' in user) return user.userData;
         return null;
       },
-    },
-    methods: {
-      updateUser(value, e) {
-        this.$store.commit('updateUser', {
-          userId: this.userId,
-          key: e.target.name,
-          value: e.target.value
-        })
-      }
     }
   }
 </script>

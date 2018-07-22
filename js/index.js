@@ -24,16 +24,6 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    updateUser(state, {userId, key, value}) {
-      const user = state.userList.find(user => user.userId === userId);
-      if (!user.userData) {
-        user.userData = {}
-      }
-      user.userData = {
-        ...user.userData,
-        [key]: value
-      }
-    },
     selectUser(state, userId) {
       state.selectedUserId = userId;
     },
