@@ -3,7 +3,7 @@
     <h3>User klasör user.vue ({{userId}})</h3>
     <div v-if="userData">
       <p>This route makes use of some option data that was passed in:</p>
-      <span>Name: <input v-model="userData.name" name="name" placeholder="name"></span>
+      <span>Name: <input v-model="userData.name" name="name" placeholder="name"></span> <br>
       <span>Age: <input v-model="userData.age" name="age" placeholder="age in years"></span>
       <p>{{userData.name}}({{userData.age}} yrs old)</p>
     </div>
