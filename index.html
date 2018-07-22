@@ -22,9 +22,11 @@
     <nav class="mainNav" style="border: 5px solid lightgray;">
       <!-- use router-link component for navigation. -->
       <!-- specify the link by passing an object to the `to` prop. -->
+      <router-link to="/">Home</router-link>
       <router-link :to="{ name: 'userList' }">User List</router-link>
-      <router-link :to="{ name: 'user', params: userList[0] }">User 123</router-link>
-      <router-link :to="{ name: 'user', params: userList[1] }">User 456</router-link>
+      <template v-for="user in userList">
+        <router-link :to="{name: 'user', params: user}">User {{user.userId}}</router-link>
+      </template>
       <router-link :to="{ name: 'named'}">Named Views Demo</router-link>
     </nav>
 
