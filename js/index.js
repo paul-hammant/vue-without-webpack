@@ -62,10 +62,9 @@ const router = new VueRouter({
 const app = new Vue({
   store: store,
   router: router,
-  data: {
-    userList: [
-      { userId: 123 },
-      { userId: 456, userData: { age: 39, name: 'Patrick O\'Dacre' } }
-    ]
+  computed: {
+    userList() {
+      return this.$store.state.userList;
+    }
   }
 }).$mount('#app');
